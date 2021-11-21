@@ -22,6 +22,7 @@ from pitraiture.camera_config import (
     configure_camera,
     verify_camera_config,
 )
+from pitraiture.cli_common import DEFAULT_DATASET_PATH
 from pitraiture.file_common import IMAGE_EXTENSION, IMAGE_TIMESTAMP_FORMAT, create_image_filename
 from pitraiture.logger_common import LOGGER
 
@@ -56,7 +57,7 @@ DEFAULT_DISPLAY_PHOTO_COUNT = True
     type=click.Tuple(types=(click.IntRange(min=0, max=4056), click.IntRange(min=0, max=3040))),
     default=(DEFAULT_CAPTURE_RESOLUTION_WIDTH, DEFAULT_CAPTURE_RESOLUTION_HEIGHT),
     show_default=True,
-    help=("Resolution of output images. Tuple, (width, height)."),
+    help="Resolution of output images. Tuple, (width, height).",
 )
 @click.option(
     "--iso",
@@ -64,7 +65,7 @@ DEFAULT_DISPLAY_PHOTO_COUNT = True
     default=DEFAULT_ISO,
     show_default=True,
     help=(
-        "ISO or film speed is a way to digitally increase the brightness of the image. Ideally"
+        "ISO or film speed is a way to digitally increase the brightness of the image. Ideally "
         "one would use the lowest ISO value possible to still get a clear image, but it can be "
         "increased to make the image brighter. See: https://en.wikipedia.org/wiki/Film_speed "
         "for more details."
@@ -77,7 +78,7 @@ DEFAULT_DISPLAY_PHOTO_COUNT = True
     show_default=True,
     help=(
         "How long the shutter is 'open' to capture an image in milliseconds. Shorter speeds "
-        "will result in darker images but be able to capture moving objects more easily. Longer"
+        "will result in darker images but be able to capture moving objects more easily. Longer "
         "exposures will make it easier to see in darker lighting conditions but could have "
         "motion blur if the subject moves while being captured."
     ),
@@ -128,7 +129,7 @@ DEFAULT_DISPLAY_PHOTO_COUNT = True
 @click.option(
     "--datasets-location",
     type=click.Path(file_okay=False, dir_okay=True, writable=True, resolve_path=True),
-    default="./datasets",
+    default=DEFAULT_DATASET_PATH,
     show_default=True,
     help=(
         "The location of the directory that all datasets will be saved to on disk. "
