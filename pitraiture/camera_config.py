@@ -13,9 +13,10 @@ from pitraiture.file_common import IMAGE_EXTENSION
 from pitraiture.logger_common import LOGGER
 
 try:
-    import picamera
+    from picamera.camera import PiCamera
 except ImportError:
-    from fake_rpi import picamera
+    # This will be executed in non-Pis, for development.
+    from fake_rpi.picamera import PiCamera
 
 
 DEFAULT_FRAMERATE = 30
@@ -35,7 +36,7 @@ def configure_camera(
     shutter_speed: ShutterSpeedType,
     awb_red_gain: AWBRedGainType,
     awb_blue_gain: AWBBlueGainType,
-) -> picamera.camera.PiCamera:
+) -> PiCamera:
     """
     Helper function to set the values we care about in the PiCamera's configuration.
     :param resolution: Resolution of output images. Tuple, (width, height).
@@ -56,7 +57,7 @@ def configure_camera(
     :return: The configured PiCamera object
     """
 
-    camera = picamera.PiCamera(
+    camera = PiCamera(
         resolution=resolution,
         framerate=DEFAULT_FRAMERATE,
     )
@@ -72,7 +73,7 @@ def configure_camera(
 
 
 def verify_camera_config(
-    camera: picamera.camera.PiCamera,
+    camera: PiCamera,
     preview_time: PreviewTimeType,
     prompt_on_timeout: PromptOnTimeoutType,
     preview_capture_path: Path,

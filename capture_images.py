@@ -26,9 +26,11 @@ from pitraiture.file_common import IMAGE_EXTENSION, IMAGE_TIMESTAMP_FORMAT, crea
 from pitraiture.logger_common import LOGGER
 
 try:
-    import picamera
+    from picamera.camera import PiCamera
 except ImportError:
-    from fake_rpi import picamera
+    # This will be executed in non-Pis, for development.
+    from fake_rpi.picamera import PiCamera
+
 
 DEFAULT_CAPTURE_RESOLUTION_WIDTH = 2000
 DEFAULT_CAPTURE_RESOLUTION_HEIGHT = 2000
@@ -64,7 +66,7 @@ DEFAULT_DISPLAY_PHOTO_COUNT = True
     help=(
         "ISO or film speed is a way to digitally increase the brightness of the image. Ideally"
         "one would use the lowest ISO value possible to still get a clear image, but it can be "
-        "increased to make the image brighter. See: https://en.wikipedia.org/wiki/Film_speed"
+        "increased to make the image brighter. See: https://en.wikipedia.org/wiki/Film_speed "
         "for more details."
     ),
 )
@@ -87,7 +89,7 @@ DEFAULT_DISPLAY_PHOTO_COUNT = True
     show_default=True,
     help=(
         "Controls how much red light should be filtered into the image."
-        "The two parameters `--awb_red_gain` and `--awb_blue_gain` should be set such that a "
+        "The two parameters `--awb-red-gain` and `--awb-blue-gain` should be set such that a "
         "known white object appears white in color in a resulting image."
     ),
 )
@@ -98,7 +100,7 @@ DEFAULT_DISPLAY_PHOTO_COUNT = True
     show_default=True,
     help=(
         "Controls how much green light should be filtered into the image."
-        "The two parameters `--awb_red_gain` and `--awb_blue_gain` should be set such that a "
+        "The two parameters `--awb-red-gain` and `--awb-blue-gain` should be set such that a "
         "known white object appears white in color in a resulting image."
     ),
 )
@@ -140,7 +142,7 @@ DEFAULT_DISPLAY_PHOTO_COUNT = True
     show_default=True,
     help=(
         "Photos will be placed in a directory named after this value within the directory given by "
-        "`--datasets_location`. Think of it like: /datasets_location/dataset_name/image1.png"
+        "`--datasets-location`. Think of it like: /datasets_location/dataset_name/image1.png"
     ),
 )
 @click.option(
@@ -191,7 +193,7 @@ def capture_images(  # pylint: disable=too-many-locals
     :param datasets_location: The location of the directory that all datasets will be saved to on
     disk. This should be a place that has ample disk space, probably not on the Pi's SD card.
     :param dataset_name: Photos will be placed in a directory named after this value within the
-    directory given by `--datasets_location`.
+    directory given by `datasets_location`.
     Think of it like: /datasets_location/dataset_name/image1.png
     :param num_photos_to_take: The number of photos to take for this run.
     :return: None
