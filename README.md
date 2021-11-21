@@ -1,5 +1,7 @@
 # Pitraiture - pitraiture 
 
+![Hardware setup for this project](./setup.JPG)
+
 Capture photos using a Raspberry Pi HQ camera for input into stylegan training.
 
 See [esologic.com/gance](https://www.esologic.com/gance) for more information.
@@ -78,19 +80,18 @@ Options:
 See the `requirements` directory for required Python modules for building, testing, developing etc.
 They can all be installed in a [virtual environment](https://docs.python.org/3/library/venv.html).
 
-Use the tool script to install python dependancies on a raspberry pi:
+Use the tool script to install python dependencies on a raspberry pi to take photos:
 
 ```
 source ./tools/create_venv_pi.sh
 ```
 
-To take photos on a pi, or:
+or, install mock dependencies that will let you develop the tool on any kind of system, 
+PC or otherwise:
 
 ```
 source ./tools/create_venv.sh
 ```
-
-To work on the development of this tool using any kind of system, Pi or otherwise.
 
 ## Developer Guide
 
