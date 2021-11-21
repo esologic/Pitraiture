@@ -2,12 +2,14 @@
 
 ![Hardware setup for this project](./setup.JPG)
 
-Capture photos using a Raspberry Pi HQ camera for input into stylegan training.
+Capture photos using a Raspberry Pi HQ camera for input into StyleGAN training.
 
 See [esologic.com/gance](https://www.esologic.com/gance) for more information.
 
 
 ## Usage
+
+To take photos:
 
 ```
 $ python capture_images.py --help
@@ -72,6 +74,27 @@ Options:
   --help                          Show this message and exit.
 ```
 
+To upload photos:
+
+```
+$ python begin_dataset_upload.py --help
+Usage: begin_dataset_upload.py [OPTIONS]
+
+  Lists the candidate files for compression/upload and prompts user to decide
+  which ones to actually compress and then expose to ownCloud for upload.
+
+Options:
+  --datasets-location DIRECTORY  The top-level directory that contains all
+                                 datasets.This should be the same location
+                                 as`--datasets_location` used in
+                                 `capture_images_pi.py`.  [default:
+                                 ./datasets]
+  --upload-location DIRECTORY    The directory that compressed datasets will
+                                 be moved to for upload.
+  --zip-uploads BOOLEAN          Datasets will be zipped before being uploaded
+                                 [default: False]
+  --help                         Show this message and exit.
+```
 
 ## Getting Started
 
