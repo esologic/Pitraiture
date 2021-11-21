@@ -1,1 +1,4 @@
+fake-rpi
+inquirer==2.7.0
 mypy==0.812
+Pillow==8.0.1
